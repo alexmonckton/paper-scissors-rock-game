@@ -65,6 +65,15 @@ def anotherround(nameA, nameB, rounds, scoreA, scoreB):
 print("\nWelcome to Rock, Paper, Scissors.")
 nameA = getname("A")
 nameB = getname("B")
-rounds = int(input("Enter the number of rounds you would like to play: "))
+while(True):
+    try:
+        rounds = int(input("Enter the number of rounds you would like to play: "))
+    except ValueError:
+        print("Please enter a valid number.")
+        continue
+    if rounds < 1:
+        print("At least 1 round please.")
+        continue
+    break
 print("\n")
 game(nameA, nameB, rounds, 0, 0)
