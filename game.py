@@ -1,3 +1,5 @@
+print("welcome to alex's python game")
+
 import random
 import getpass
 choices = ["Rock","Paper","Scissors"]
