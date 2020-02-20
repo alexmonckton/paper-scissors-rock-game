@@ -3,6 +3,24 @@ print("welcome to alex's python game")
 import random
 import getpass
 choices = ["Rock","Paper","Scissors"]
+
+def startgame():
+    print("\nWelcome to Rock, Paper, Scissors.")
+    nameA = getname("A")
+    nameB = getname("B")
+    while(True):
+        try:
+            rounds = int(input("Enter the number of rounds you would like to play: "))
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
+        if rounds < 1:
+            print("At least 1 round please.")
+            continue
+        break
+    print("\n")
+    game(nameA, nameB, rounds, 0, 0)
+
 def getname(player):
     name = input("Please enter your name player %s: " % player)
     while len(name) < 2:
@@ -29,15 +47,7 @@ def game(nameA, nameB, rounds, scoreA, scoreB):
     if rounds > 1:
         anotherround(nameA, nameB, rounds, scoreA, scoreB)
     else:
-        print("\nFINAL OVERALL SCORE:\n%s: %i\n%s: %i" % (nameA, scoreA, nameB, scoreB))
-        if scoreA > scoreB:
-            print("CONGRATULATIONS %s! YOU ARE THE OVERALL WINNER!" % nameA)
-        elif scoreB > scoreA:
-            print("CONGRATULATIONS %s! YOU ARE THE OVERALL WINNER!" % nameB)
-        else:
-            print("YOU BOTH TIED!")
-            if (input("One more round for tiebreaker? y/n: ").lower() == "y"):
-                game(nameA, nameB, 1, scoreA, scoreB)
+        endgame(nameA, nameB, scoreA, scoreB)
 
 
 def MakeChoice(name):
@@ -64,18 +74,14 @@ def anotherround(nameA, nameB, rounds, scoreA, scoreB):
     print("\n")
     game(nameA, nameB, rounds, scoreA, scoreB)
 
-print("\nWelcome to Rock, Paper, Scissors.")
-nameA = getname("A")
-nameB = getname("B")
-while(True):
-    try:
-        rounds = int(input("Enter the number of rounds you would like to play: "))
-    except ValueError:
-        print("Please enter a valid number.")
-        continue
-    if rounds < 1:
-        print("At least 1 round please.")
-        continue
-    break
-print("\n")
-game(nameA, nameB, rounds, 0, 0)
+def endgame(nameA, nameB, scoreA, scoreB):
+    print("\nFINAL OVERALL SCORE:\n%s: %i\n%s: %i" % (nameA, scoreA, nameB, scoreB))
+    if scoreA > scoreB:
+        print("CONGRATULATIONS %s! YOU ARE THE OVERALL WINNER!" % nameA)
+    elif scoreB > scoreA:
+        print("CONGRATULATIONS %s! YOU ARE THE OVERALL WINNER!" % nameB)
+    else:
+        print("YOU BOTH TIED!")
+        if (input("One more round for tiebreaker? y/n: ").lower() == "y"):
+            game(nameA, nameB, 1, scoreA, scoreB)
+startgame()
